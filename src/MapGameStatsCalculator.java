@@ -19,6 +19,8 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    * }
    */
   private Map<String, Integer> gameCounts;
+  
+  
 
   // For some waves you will need to add more private instance variables here!
 
@@ -30,9 +32,17 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
     while(scoreInput.hasNext()) {
       String name = scoreInput.next();
       int score = scoreInput.nextInt();
-
+      if(gameCounts.containsKey(name)){
+        int oldCount = gameCounts.get(name);
+        int newCount = oldCount+1;
+        gameCounts.put(name,newCount);
+      }
+      else{
+        gameCounts.put(name,1);
+      }
       // TODO: add logic here to use the name and score to fill your map(s)!
     }
+    System.out.println(gameCounts);
   }
 
   /**
