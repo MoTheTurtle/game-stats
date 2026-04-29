@@ -31,6 +31,37 @@ public class MapGameStatsCalculatorTest {
     // Assert
     assertEquals(4, actual);
   }
+@Test
+  public void gameCountReturnsNumberOfGamesForPersonOnlyOnePerson() {
+    // Arrange
+    String scoreData = "Nupur 10\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    int actual = calculator.gameCount("Nupur");
+
+    // Assert
+    assertEquals(1, actual);
+  }
+@Test
+  public void gameCountReturnsNumberOfGamesForPersonNegativeScore() {
+    // Arrange
+    String scoreData = "Nupur 10\n"
+        + "Baya -30\n"
+        + "Xinting 25\n"
+        + "Nupur -40\n"
+        + "Baya 50\n"
+        + "Nupur -20\n"
+        + "Baya 60\n"
+        + "Nupur 30\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    int actual = calculator.gameCount("Nupur");
+
+    // Assert
+    assertEquals(4, actual);
+  }
 
   @Test
   public void gameCountThrowsNullPointerExceptionForNullPerson() {
