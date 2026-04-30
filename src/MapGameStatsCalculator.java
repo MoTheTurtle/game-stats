@@ -20,8 +20,8 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   private Map<String, Integer> gameCounts;
   private Map<String, Integer> highScore;
-  
-
+  private Map<String, Integer> totalScore;
+  private Map<String, Double> averageScore; 
   // For some waves you will need to add more private instance variables here!
 
 
@@ -29,6 +29,9 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
   public MapGameStatsCalculator(Scanner scoreInput) {
     gameCounts = new HashMap<>();
     highScore = new HashMap<>(); 
+    totalScore = new HashMap<>();
+    averageScore = new HashMap<>(); 
+
     
     while(scoreInput.hasNext()) {
       String name = scoreInput.next();
@@ -45,8 +48,23 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
       if(!highScore.containsKey(name) || score>highScore.get(name)){
           highScore.put(name,score);
       }
+      if(totalScore.containsKey(name)){
+        int tempT = totalScore.get(name); 
+        tempT = tempT+score; 
+        totalScore.put(name,tempT);
+      }
+      else{
+        totalScore.put(name,score);
+      }
       
     } 
+     
+    for(String name:totalScore.keySet()){
+      int count = gameCounts.get(name);
+      int total = totalScore.get(name);
+      double average = (double)total/count;
+      averageScore.put(name,average);
+    }
 
     
      
@@ -126,11 +144,10 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public double getAverageScore(String person) {
-    // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'getAverageScore'");
+     // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
+    checkPerson(person);
+    return(averageScore.get(person));
 
-    // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkPerson(person);
   }
 
   /**
