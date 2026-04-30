@@ -83,7 +83,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
 
     // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
     checkPerson(person);
-    return highScore(person);
+    return highScore.get(person);
   }
 
   /**
