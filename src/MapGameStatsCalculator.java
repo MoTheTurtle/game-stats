@@ -110,9 +110,6 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
         highestScore = tempScore;
         highestScoreName = tempName;
       }
-      else if(tempScore == highestScore && name.compareTo(highestScoreName)<0){
-        highestScoreName = name;
-      }
     }
     // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
     checkScoreData();
