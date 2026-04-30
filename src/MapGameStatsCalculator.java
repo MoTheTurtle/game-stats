@@ -29,7 +29,7 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
   public MapGameStatsCalculator(Scanner scoreInput) {
     gameCounts = new HashMap<>();
     highScore = new HashMap<>(); 
-
+    
     while(scoreInput.hasNext()) {
       String name = scoreInput.next();
       int score = scoreInput.nextInt();
@@ -45,9 +45,11 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
       if(!highScore.containsKey(name) || score>highScore.get(name)){
           highScore.put(name,score);
       }
-      // TODO: add logic here to use the name and score to fill your map(s)!
-    }
-    System.out.println(highScore); 
+      
+    } 
+
+    
+     
   }
 
 
@@ -97,11 +99,25 @@ public class MapGameStatsCalculator implements GameStatsCalculator {
    */
   @Override
   public String highestScorer() {
-    // TODO: remove this exception once you have implemented your method!
-    throw new UnsupportedOperationException("Unimplemented method 'highestScorer'");
+    
+    int highestScore = Integer.MIN_VALUE; 
+    String highestScoreName = null; 
 
+    for(String name : highScore.keySet()){
+      String tempName = name;
+      int tempScore = highScore.get(name);
+      if(tempScore>highestScore){
+        highestScore = tempScore;
+        highestScoreName = tempName;
+      }
+      else if(tempScore == highestScore && name.compareTo(highestScoreName)<0){
+        highestScoreName = name;
+      }
+    }
     // Uncomment this and have it as your first line once you remove the UnsupportedOperationException
-    //checkScoreData();
+    checkScoreData();
+    return highestScoreName; 
+
   }
 
   /**
