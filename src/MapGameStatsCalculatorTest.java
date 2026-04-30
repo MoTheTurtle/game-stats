@@ -104,6 +104,18 @@ public class MapGameStatsCalculatorTest {
   }
 
   // highScore tests
+  @Test
+  public void highScoreReturnsHighestScoreForOnlyOnePerson() {
+    // Arrange
+    String scoreData = "Nupur -10\n";
+    GameStatsCalculator calculator = new MapGameStatsCalculator(new Scanner(scoreData));
+
+    // Act
+    int actual = calculator.highScore("Nupur");
+
+    // Assert
+    assertEquals(-10, actual);
+  }
 @Test
   public void highScoreReturnsHighestScoreForPersonForNegative() {
     // Arrange
